@@ -14,17 +14,17 @@
 
 const students = [
     {
-        id:'001',
+        id: '001',
         name: "Muhammad Ahmed",
         marks: { Math: 85, English: 91, History: 55 }
     },
     {
-        id:'002',
+        id: '002',
         name: "Muhammad Raza",
         marks: { Math: 43, English: 21, History: 62 }
     },
     {
-        id:'003',
+        id: '003',
         name: "Asad",
         marks: { Math: 32, English: 40, History: 75 }
     }
@@ -36,37 +36,33 @@ const students = [
 
 
 const findStudent = (id) => {
-     let student = students.find(student => student.id === id)
-     if(!student) {
+    let student = students.find(student => student.id === id)
+    if (!student) {
         return null
-     }
-     return student
+    }
+    return student
 }
-console.log(findStudent("002"))
+console.log(findStudent("001"))
 
 
 
 
 
-// const getAverage = (id) => {
-//     let targetObject;
-//     for (const student of students) {
-//         if(student.id === id){
-//             targetObject = student.marks
-//         }
-//         else{
-//             null
-//         }
-//     }
-    
-//     let targetedArray = Object.entries(targetObject)   
-    
-//     let total = targetedArray.reduce((sum, elem) => { return sum + elem[1] } , 0)
-//     let average = (total / targetedArray.length)
-//     return average
-// }
+const getAverage = (id) => {
+    let student = findStudent(id);
 
+    if (!student) {
+        return null
+    }
+    else {
+        let targetedArray = Object.entries(student.marks)
 
-// console.log(getAverage("002").toFixed(1))
+        let total = targetedArray.reduce((sum, elem) => { return sum + elem[1] }, 0)
+        let average = (total / targetedArray.length)
+        return average
+    }
 
-// findStudent(id): return the student, or a clear “not found” result that the caller handles without crashing.
+}
+
+console.log(getAverage("001"))
+

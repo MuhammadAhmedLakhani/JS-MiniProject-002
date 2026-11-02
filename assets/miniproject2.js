@@ -1,0 +1,72 @@
+// Mini project 2: Student Record System (about 1.5 to 2 hours)
+
+// An array of student objects (each with id, name, and a marks object) and these functions:
+
+// addStudent(id, name, marks): refuse a duplicate id and marks outside 0 to 100.
+// findStudent(id): return the student, or a clear “not found” result that the caller handles without crashing.
+// updateMark(id, subject, mark): change one mark, with the same validation.
+// getAverage(id): the average across subjects.
+// getTopStudent(): the student with the highest average.
+// printReport(): one line per student with name, average, and a grade (A/B/C/Fail), in the style of your receipt.
+
+// Edge cases to test: an empty list, a duplicate id, a missing student, and a mark of 101.
+
+
+const students = [
+    {
+        id:'001',
+        name: "Muhammad Ahmed",
+        marks: { Math: 85, English: 91, History: 55 }
+    },
+    {
+        id:'002',
+        name: "Muhammad Raza",
+        marks: { Math: 43, English: 21, History: 62 }
+    },
+    {
+        id:'003',
+        name: "Asad",
+        marks: { Math: 32, English: 40, History: 75 }
+    }
+]
+
+
+
+// findStudent(id): return the student, or a clear “not found” result that the caller handles without crashing.
+
+
+const findStudent = (id) => {
+     let student = students.find(student => student.id === id)
+     if(!student) {
+        return null
+     }
+     return student
+}
+console.log(findStudent("002"))
+
+
+
+
+
+// const getAverage = (id) => {
+//     let targetObject;
+//     for (const student of students) {
+//         if(student.id === id){
+//             targetObject = student.marks
+//         }
+//         else{
+//             null
+//         }
+//     }
+    
+//     let targetedArray = Object.entries(targetObject)   
+    
+//     let total = targetedArray.reduce((sum, elem) => { return sum + elem[1] } , 0)
+//     let average = (total / targetedArray.length)
+//     return average
+// }
+
+
+// console.log(getAverage("002").toFixed(1))
+
+// findStudent(id): return the student, or a clear “not found” result that the caller handles without crashing.

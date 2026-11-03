@@ -68,26 +68,51 @@ const findStudent = (id) => {
 
 // addStudent(id, name, marks): refuse a duplicate id and marks outside 0 to 100.
 
-const addStudent = (id, name, marks) => {
+// const addStudent = (id, name, marks) => {
+//     let idStatus = findStudent(id)
+//     let markStatus = Object.entries(marks).every(mark => (mark[1] > 0 && mark[1] < 100))
+//     console.log(markStatus)
+//     if (idStatus) {                             
+//         return "student id already exits"
+//     }
+//     else if (!markStatus) {
+//         return "marks are invalid"
+//     }
+//     else {
+//         students.push({
+//             name: name,
+//             id: id
+
+//         })
+//         return "Student added sucessfully"
+//     }
+
+// }
+
+// console.log(addStudent('001', "Raza",{Math:89,English:72,History:10}))
+// console.log(students)
+
+// updateMark(id, subject, mark): change one mark, with the same validation.
+
+
+let updateMark = (id, subject, mark) => {
     let idStatus = findStudent(id)
-    let markStatus = Object.entries(marks).every(mark => (mark[1] > 0 && mark[1] < 100))
-    console.log(markStatus)
-    if (idStatus) {                             
-        return "student id already exits"
+    let subjectStatus = subject in idStatus.marks   
+    let markStatus = (subjectStatus) &&  (mark >= 0 && mark <= 100)
+    if (!idStatus) {
+        return "student id doesnot exits"
     }
-    else if (!markStatus) {
-        return "marks are invalid"
+    else if(!markStatus) {
+        return "student mark subject or value not valid"
     }
     else {
-        students.push({
-            name: name,
-            id: id
-
-        })
-        return "Student added sucessfully"
+      idStatus["marks"][subject] = mark
+        return "Marks updated successfully"
     }
-
 }
 
-console.log(addStudent('001', "Raza",{Math:89,English:72,History:10}))
-console.log(students)
+console.log(updateMark("001","Math",10))
+console.log("after --->",students)
+
+
+

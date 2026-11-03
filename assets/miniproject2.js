@@ -42,27 +42,52 @@ const findStudent = (id) => {
     }
     return student
 }
-console.log(findStudent("001"))
+// console.log(findStudent("001"))
 
 
 
 
 
-const getAverage = (id) => {
-    let student = findStudent(id);
+// const getAverage = (id) => {
+//     let student = findStudent(id);
 
-    if (!student) {
-        return null
+//     if (!student) {
+//         return null
+//     }
+//     else {
+//         let targetedArray = Object.entries(student.marks)
+
+//         let total = targetedArray.reduce((sum, elem) => { return sum + elem[1] }, 0)
+//         let average = (total / targetedArray.length)
+//         return average
+//     }
+
+// }
+
+// console.log(getAverage("001"))
+
+// addStudent(id, name, marks): refuse a duplicate id and marks outside 0 to 100.
+
+const addStudent = (id, name, marks) => {
+    let idStatus = findStudent(id)
+    let markStatus = Object.entries(marks).every(mark => (mark[1] > 0 && mark[1] < 100))
+    console.log(markStatus)
+    if (idStatus) {                             
+        return "student id already exits"
+    }
+    else if (!markStatus) {
+        return "marks are invalid"
     }
     else {
-        let targetedArray = Object.entries(student.marks)
+        students.push({
+            name: name,
+            id: id
 
-        let total = targetedArray.reduce((sum, elem) => { return sum + elem[1] }, 0)
-        let average = (total / targetedArray.length)
-        return average
+        })
+        return "Student added sucessfully"
     }
 
 }
 
-console.log(getAverage("001"))
-
+console.log(addStudent('001', "Raza",{Math:89,English:72,History:10}))
+console.log(students)

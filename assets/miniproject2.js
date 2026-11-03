@@ -48,21 +48,21 @@ const findStudent = (id) => {
 
 
 
-// const getAverage = (id) => {
-//     let student = findStudent(id);
+const getAverage = (id) => {
+    let student = findStudent(id);
 
-//     if (!student) {
-//         return null
-//     }
-//     else {
-//         let targetedArray = Object.entries(student.marks)
+    if (!student) {
+        return null
+    }
+    else {
+        let targetedArray = Object.entries(student.marks)
 
-//         let total = targetedArray.reduce((sum, elem) => { return sum + elem[1] }, 0)
-//         let average = (total / targetedArray.length)
-//         return average
-//     }
+        let total = targetedArray.reduce((sum, elem) => { return sum + elem[1] }, 0)
+        let average = (total / targetedArray.length)
+        return average
+    }
 
-// }
+}
 
 // console.log(getAverage("001"))
 
@@ -116,26 +116,66 @@ const findStudent = (id) => {
 
 // getTopStudent(): the student with the highest average.
 
-let getTopStudent = () => {
-    let averageArray = [];
-    // slecting the marks object and turning it into array through enteries
-    let marksArray = students.map(student => Object.entries(student.marks))
-    marksArray.forEach((stu) => {
-        let total = stu.reduce((sum, curr) => {
-            return sum + curr[1]
-        }, 0)
-        // pushing the average of each student to average array
-        averageArray.push(total / stu.length)
-    })
-    // finding highest from average array
-    let highest = averageArray.reduce((high, curr) => {
-        return curr > high ? curr : high
-    })
-    
-    let highIndex = averageArray.findIndex(elem => elem === highest)
-    return students[highIndex].name
+// let getTopStudent = () => {
+//     let averageArray = [];
+//     // slecting the marks object and turning it into array through enteries
+//     let marksArray = students.map(student => Object.entries(student.marks))
+//     marksArray.forEach((stu) => {
+//         let total = stu.reduce((sum, curr) => {
+//             return sum + curr[1]
+//         }, 0)
+//         // pushing the average of each student to average array
+//         averageArray.push(total / stu.length)
+//     })
+//     // finding highest from average array
+//     let highest = averageArray.reduce((high, curr) => {
+//         return curr > high ? curr : high
+//     })
+
+//     let highIndex = averageArray.findIndex(elem => elem === highest)
+//     return students[highIndex].name
+// }
+
+// console.log(getTopStudent())
+
+
+// printReport(): one line per student with name, average, 
+// and a grade (A/B/C/Fail), in the style of your receipt.
+
+
+let getGrade = (avgMarks) => {
+    switch (true) {
+        case avgMarks < 50:
+            return "Fail";
+        case avgMarks >= 50:
+            return "D";
+        case (avgMarks >= 65):
+            return "C";
+        case avgMarks >= 75:
+            return "B";
+        case avgMarks > 85:
+            return "A";
+        default:
+            return "average marks not valid"
+
+    }
 }
 
-console.log(getTopStudent())
+
+let printReport = () => {
+    if (students.length > 0) {
+        students.forEach(stu => {
+            let average = getAverage(stu.id)
+            let grade = getGrade(average)
+            console.log("--------------------------------")
+            console.log(`${stu.name} has ${average} average marks with grade ${grade}`)
+        })
+    } else {
+        return "No students"
+    }
+}
+
+printReport()
+
 
 

@@ -95,24 +95,47 @@ const findStudent = (id) => {
 // updateMark(id, subject, mark): change one mark, with the same validation.
 
 
-let updateMark = (id, subject, mark) => {
-    let idStatus = findStudent(id)
-    let subjectStatus = subject in idStatus.marks   
-    let markStatus = (subjectStatus) &&  (mark >= 0 && mark <= 100)
-    if (!idStatus) {
-        return "student id doesnot exits"
-    }
-    else if(!markStatus) {
-        return "student mark subject or value not valid"
-    }
-    else {
-      idStatus["marks"][subject] = mark
-        return "Marks updated successfully"
-    }
+// let updateMark = (id, subject, mark) => {
+//     let idStatus = findStudent(id)
+//     let subjectStatus = subject in idStatus.marks   
+//     let markStatus = (subjectStatus) &&  (mark >= 0 && mark <= 100)
+//     if (!idStatus) {
+//         return "student id doesnot exits"
+//     }
+//     else if(!markStatus) {
+//         return "student mark subject or value not valid"
+//     }
+//     else {
+//       idStatus["marks"][subject] = mark
+//         return "Marks updated successfully"
+//     }
+// }
+
+// console.log(updateMark("001","Math",10))
+// console.log("after --->",students)
+
+// getTopStudent(): the student with the highest average.
+
+let getTopStudent = () => {
+    let averageArray = [];
+    // slecting the marks object and turning it into array through enteries
+    let marksArray = students.map(student => Object.entries(student.marks))
+    marksArray.forEach((stu) => {
+        let total = stu.reduce((sum, curr) => {
+            return sum + curr[1]
+        }, 0)
+        // pushing the average of each student to average array
+        averageArray.push(total / stu.length)
+    })
+    // finding highest from average array
+    let highest = averageArray.reduce((high, curr) => {
+        return curr > high ? curr : high
+    })
+    
+    let highIndex = averageArray.findIndex(elem => elem === highest)
+    return students[highIndex].name
 }
 
-console.log(updateMark("001","Math",10))
-console.log("after --->",students)
-
+console.log(getTopStudent())
 
 
